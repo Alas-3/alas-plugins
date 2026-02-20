@@ -73,6 +73,20 @@
       "logo": "https://files.catbox.moe/krovkt.png",
       "contentLanguage": ["en"],
       "supportsExternalPlayer": true
+    },
+    {
+      "id": "alas-sunduq",
+      "name": "alas-sunduq",
+      "description": "Sunduq multi-source scraper adapted for Nuvio (Vidlink + VixSrc)",
+      "version": "1.0.0",
+      "author": "Alas",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/alas-sunduq.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://raw.githubusercontent.com/Alas-3/alas-plugins/main/Assets/sunduq.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
     }
   ]
 }
