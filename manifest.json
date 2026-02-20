@@ -1,0 +1,36 @@
+{
+  "name": "Ace Nuvio Providers",
+  "version": "1.0.0",
+  "description": "Custom Nuvio provider repo converted from ashi source logic",
+  "author": "Ace",
+  "scrapers": [
+    {
+      "id": "ashi1movies",
+      "name": "Ashi 1Movies",
+      "description": "1Movies-based scraper adapted from ashi source for Nuvio",
+      "version": "1.0.0",
+      "author": "Ace",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/ashi1movies.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://files.catbox.moe/y8v199.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
+    },
+    {
+      "id": "ashianimekai",
+      "name": "ashianimekai",
+      "description": "Animekai-based scraper adapted from ashi source for Nuvio",
+      "version": "1.0.0",
+      "author": "Ace",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/ashianimekai.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://files.catbox.moe/y8v199.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
+    }
+  ]
+}
