@@ -1,8 +1,8 @@
 const TMDB_API_KEY = '439c478a771f35c05022f9feabcca01c';
 const TMDB_BASE = 'https://api.themoviedb.org/3';
 const BASE = 'https://animepahe.si';
-const PROVIDER_ID = 'alas-animepahe';
-const AUDIO_MODE = 'sub';
+const PROVIDER_ID = 'alas-animepahedub';
+const AUDIO_MODE = 'dub';
 
 function normalize(s) {
   return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();

@@ -278,18 +278,18 @@ function getStreams(tmdbId, mediaType, seasonNum, episodeNum) {
               return (resolved || [])
                 .filter(Boolean)
                 .map((streamObj) => ({
-                  name: `AshiAnimekai - ${streamObj.type}`,
+                  name: `alas-animekai - ${streamObj.type}`,
                   title: `${meta.title} (${meta.year || 'Unknown'})`,
                   url: streamObj.url,
                   quality: '1080p',
                   headers: playbackHeaders,
-                  provider: 'ashianimekai'
+                  provider: 'alas-animekai'
                 }));
             });
         });
     })
     .catch((err) => {
-      console.error('[AshiAnimekai] Error:', err && err.message ? err.message : err);
+      console.error('[alas-animekai] Error:', err && err.message ? err.message : err);
       return [];
     });
 }

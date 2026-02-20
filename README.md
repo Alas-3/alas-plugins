@@ -4,13 +4,11 @@ Custom Nuvio plugin repository with a scraper adapted from `ashi` source logic.
 
 ## Included scraper
 
-- `alas-1movies` (`providers/alas-1movies.js`)
-- `ashianimekai` (`providers/ashianimekai.js`)
-- `alas-hianime` (`providers/alas-hianime.js`)
+- `alas-animekai` (`providers/alas-animekai.js`)
 - `alas-animepahe` (`providers/alas-animepahe.js`)
-- Uses TMDB metadata lookup + standalone 1movies extraction flow
+- `alas-animepahedub` (`providers/alas-animepahedub.js`)
 - Uses Animekai extraction flow adapted from `ashi`
-- Uses standalone HiAnime and Animepahe source flows
+- Uses standalone Animepahe and Animepahe DUB source flows
 
 ## Add to Nuvio
 
@@ -24,3 +22,14 @@ https://raw.githubusercontent.com/Alas-3/alas-plugins/refs/heads/main/manifest.j
 
 - Manifest format follows current Nuvio `pluginService` contract (`{ name, version, scrapers: [] }`).
 - Each scraper is listed separately in `manifest.json`, so each one is independently toggleable in Nuvio.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0.
+
+## Disclaimer
+
+- No content is hosted by this repository.
+- Providers fetch publicly available content from third-party websites.
+- Users are responsible for compliance with local laws.
+- For DMCA concerns, contact the actual content hosts.
