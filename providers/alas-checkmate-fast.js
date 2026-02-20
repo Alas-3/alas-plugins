@@ -20,6 +20,24 @@ function buildContentId(tmdbId, mediaType, seasonNum, episodeNum) {
   return `/movie/${tmdbId}`;
 }
 
+function inferQualityScore(text) {
+  const value = String(text || '').toLowerCase();
+  if (value.includes('2160') || value.includes('4k')) return 2160;
+  if (value.includes('1440')) return 1440;
+  if (value.includes('1080')) return 1080;
+  if (value.includes('720')) return 720;
+  if (value.includes('480')) return 480;
+  if (value.includes('360')) return 360;
+  return 0;
+}
+
+function toQualityLabel(score) {
+  if (score >= 2160) return '2160p';
+  if (score >= 1440) return '1440p';
+  if (score >= 1080) return '1080p';
+  return 'Auto';
+}
+
 function normalizeStreams(rawResult) {
   const streams = [];
   const payloadStreams = (rawResult && rawResult.streams) || [];
@@ -33,29 +51,39 @@ function normalizeStreams(rawResult) {
       const label = payloadStreams[i] || 'Primary';
       const url = payloadStreams[i + 1];
       if (!url || typeof url !== 'string') continue;
+      const score = Math.max(inferQualityScore(label), inferQualityScore(url));
+      if (score < 1080) continue;
       streams.push({
         name: `${PROVIDER_ID} - ${label}`,
         url,
-        quality: url.includes('2160') ? '2160p' : url.includes('1080') ? '1080p' : 'Auto',
+        quality: toQualityLabel(score),
         headers: rawResult.referer ? { Referer: rawResult.referer } : {},
-        provider: PROVIDER_ID
+        provider: PROVIDER_ID,
+        _score: score
       });
     }
-    return streams;
+    return streams
+      .sort((a, b) => b._score - a._score)
+      .map(({ _score, ...rest }) => rest);
   }
 
   payloadStreams.forEach((item) => {
     if (!item || !item.streamUrl) return;
+    const score = Math.max(inferQualityScore(item.title), inferQualityScore(item.streamUrl));
+    if (score < 1080) return;
     streams.push({
       name: `${PROVIDER_ID} - ${item.title || 'Primary'}`,
       url: item.streamUrl,
-      quality: String(item.title || '').includes('4K') ? '2160p' : String(item.title || '').includes('1080') ? '1080p' : 'Auto',
+      quality: toQualityLabel(score),
       headers: item.headers || (rawResult.referer ? { Referer: rawResult.referer } : {}),
-      provider: PROVIDER_ID
+      provider: PROVIDER_ID,
+      _score: score
     });
   });
 
-  return streams;
+  return streams
+    .sort((a, b) => b._score - a._score)
+    .map(({ _score, ...rest }) => rest);
 }
 
 async function gamma(contentId) {
