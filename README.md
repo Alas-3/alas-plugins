@@ -4,10 +4,13 @@ Custom Nuvio plugin repository with a scraper adapted from `ashi` source logic.
 
 ## Included scraper
 
-- `Ashi 1Movies` (`providers/ashi1movies.js`)
+- `alas-1movies` (`providers/alas-1movies.js`)
 - `ashianimekai` (`providers/ashianimekai.js`)
-- Uses TMDB metadata lookup + 1Movies extraction flow adapted from `ashi`
+- `alas-hianime` (`providers/alas-hianime.js`)
+- `alas-animepahe` (`providers/alas-animepahe.js`)
+- Uses TMDB metadata lookup + standalone 1movies extraction flow
 - Uses Animekai extraction flow adapted from `ashi`
+- Uses standalone HiAnime and Animepahe source flows
 
 ## Add to Nuvio
 

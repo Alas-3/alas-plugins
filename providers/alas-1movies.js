@@ -53,10 +53,7 @@ function titleScore(query, candidate, year) {
     if (cTokens.includes(t)) score += 40;
   });
 
-  if (year && candidate && String(candidate).includes(String(year))) {
-    score += 120;
-  }
-
+  if (year && candidate && String(candidate).includes(String(year))) score += 120;
   return score;
 }
 
@@ -85,28 +82,27 @@ function searchOneMovies(query) {
     `${ONE_MOVIES_BASE}/browser?keyword=${encoded}&page=3`
   ];
 
-  return Promise.all(
-    urls.map(url => fetch(proxied(url)).then(r => (r.ok ? r.text() : '')))
-  ).then((pages) => {
-    const out = [];
-    const posterHrefRegex = /href="([^"]*)" class="poster"/g;
-    const titleRegex = /class="title" href="[^"]*">([^<]*)</g;
+  return Promise.all(urls.map(url => fetch(proxied(url)).then(r => (r.ok ? r.text() : ''))))
+    .then((pages) => {
+      const out = [];
+      const posterHrefRegex = /href="([^"]*)" class="poster"/g;
+      const titleRegex = /class="title" href="[^"]*">([^<]*)</g;
 
-    pages.forEach((html) => {
-      const posterMatches = [...html.matchAll(posterHrefRegex)];
-      const titleMatches = [...html.matchAll(titleRegex)];
-      const minLen = Math.min(posterMatches.length, titleMatches.length);
+      pages.forEach((html) => {
+        const posterMatches = [...html.matchAll(posterHrefRegex)];
+        const titleMatches = [...html.matchAll(titleRegex)];
+        const minLen = Math.min(posterMatches.length, titleMatches.length);
 
-      for (let i = 0; i < minLen; i++) {
-        const href = posterMatches[i][1];
-        const fullHref = href.startsWith('http') ? href : `${ONE_MOVIES_BASE}${href}`;
-        const title = decodeHtmlEntities(titleMatches[i][1]);
-        out.push({ href: fullHref, title });
-      }
+        for (let i = 0; i < minLen; i++) {
+          const href = posterMatches[i][1];
+          const fullHref = href.startsWith('http') ? href : `${ONE_MOVIES_BASE}${href}`;
+          const title = decodeHtmlEntities(titleMatches[i][1]);
+          out.push({ href: fullHref, title });
+        }
+      });
+
+      return out;
     });
-
-    return out;
-  });
 }
 
 function extractMovieId(detailHtml) {
@@ -163,17 +159,13 @@ function getMasterPlaylistFromEpisodeEid(eid) {
       if (!decryptedUrl) return null;
 
       const mediaUrl = decryptedUrl.replace('/e/', '/media/');
-      const headers = {
-        Referer: `${ONE_MOVIES_BASE}/`,
-        'User-Agent': UA
-      };
+      const headers = { Referer: `${ONE_MOVIES_BASE}/`, 'User-Agent': UA };
 
       return fetch(mediaUrl, { headers })
         .then(r => (r.ok ? r.json() : null))
         .then(mediaJson => {
           const rapidEncrypted = mediaJson && mediaJson.result;
           if (!rapidEncrypted) return null;
-
           const rapidUrl = `https://enc-dec.app/api/dec-rapid?text=${encodeURIComponent(rapidEncrypted)}&agent=${encodeURIComponent(UA)}`;
           return fetch(rapidUrl).then(r => (r.ok ? r.json() : null));
         })
@@ -206,10 +198,7 @@ function parseM3U8Variants(masterUrl) {
         out.push({ quality, url });
       }
 
-      if (out.length === 0 && masterUrl.includes('.m3u8')) {
-        out.push({ quality: 'Auto', url: masterUrl });
-      }
-
+      if (out.length === 0 && masterUrl.includes('.m3u8')) out.push({ quality: 'Auto', url: masterUrl });
       return out;
     })
     .catch(() => []);
@@ -220,7 +209,6 @@ function selectBestResult(results, title, year) {
   const ranked = results
     .map(r => ({ ...r, score: titleScore(title, r.title, year) }))
     .sort((a, b) => b.score - a.score);
-
   return ranked[0] || null;
 }
 
@@ -244,33 +232,24 @@ function getStreams(tmdbId, mediaType, seasonNum, episodeNum) {
               if (!movieId) return [];
 
               return getEpisodesList(movieId, episode)
-                .then(eid => {
-                  if (!eid) return [];
-                  return getMasterPlaylistFromEpisodeEid(eid);
-                })
+                .then(eid => (eid ? getMasterPlaylistFromEpisodeEid(eid) : null))
                 .then(master => parseM3U8Variants(master))
                 .then(variants => {
-                  const playbackHeaders = {
-                    Referer: `${ONE_MOVIES_BASE}/`,
-                    'User-Agent': UA
-                  };
+                  const playbackHeaders = { Referer: `${ONE_MOVIES_BASE}/`, 'User-Agent': UA };
 
                   return variants.map(v => ({
-                    name: `Ashi 1Movies - ${v.quality}`,
+                    name: `alas-1movies - ${v.quality}`,
                     title: `${meta.title} (${meta.year || 'Unknown'})`,
                     url: v.url,
                     quality: v.quality,
                     headers: playbackHeaders,
-                    provider: 'ashi1movies'
+                    provider: 'alas-1movies'
                   }));
                 });
             });
         });
     })
-    .catch((err) => {
-      console.error('[Ashi1Movies] Error:', err && err.message ? err.message : err);
-      return [];
-    });
+    .catch(() => []);
 }
 
 if (typeof module !== 'undefined' && module.exports) {
