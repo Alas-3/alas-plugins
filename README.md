@@ -11,16 +11,10 @@ Custom Nuvio plugin repository with a scraper adapted from `ashi` source logic.
 
 ## Add to Nuvio
 
-Use this repo root raw URL in Nuvio Plugins:
+Plugin:
 
 ```text
-https://raw.githubusercontent.com/<your-username>/<your-repo>/refs/heads/main/
-```
-
-Nuvio will auto-fetch:
-
-```text
-https://raw.githubusercontent.com/<your-username>/<your-repo>/refs/heads/main/manifest.json
+https://raw.githubusercontent.com/Alas-3/alas-plugins/refs/heads/main/manifest.json
 ```
 
 ## Notes
