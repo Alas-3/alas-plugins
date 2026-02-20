@@ -87,6 +87,48 @@
       "logo": "https://raw.githubusercontent.com/Alas-3/alas-plugins/main/Assets/sunduq.png",
       "contentLanguage": ["en"],
       "supportsExternalPlayer": true
+    },
+    {
+      "id": "alas-videasy",
+      "name": "alas-videasy",
+      "description": "VidEasy source adapted from downloads/sources 2 for Nuvio",
+      "version": "1.0.0",
+      "author": "Alas",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/alas-videasy.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://www.videasy.net/logo.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
+    },
+    {
+      "id": "alas-vidsrc",
+      "name": "alas-vidsrc",
+      "description": "VidSrc (vsrc.su) source adapted from downloads/sources 2 for Nuvio",
+      "version": "1.0.0",
+      "author": "Alas",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/alas-vidsrc.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://vsrc.su/template/vidsrc-ico.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
+    },
+    {
+      "id": "alas-vidfast",
+      "name": "alas-vidfast",
+      "description": "VidFast source adapted from downloads/sources 2 for Nuvio",
+      "version": "1.0.0",
+      "author": "Alas",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/alas-vidfast.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://files.catbox.moe/i6r78t.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
     }
   ]
 }

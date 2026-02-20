@@ -10,11 +10,17 @@ Custom Nuvio plugin repository with a scraper adapted from `ashi` source logic.
 - `alas-checkmate` (`providers/alas-checkmate.js`)
 - `alas-checkmate-fast` (`providers/alas-checkmate-fast.js`)
 - `alas-sunduq` (`providers/alas-sunduq.js`)
+- `alas-videasy` (`providers/alas-videasy.js`)
+- `alas-vidsrc` (`providers/alas-vidsrc.js`)
+- `alas-vidfast` (`providers/alas-vidfast.js`)
 - Uses Animekai extraction flow adapted from `ashi`
 - Uses standalone Animepahe and Animepahe DUB source flows
 - Uses Checkmate multi-resolver flow adapted from `downloads/sources 2/checkmate`
 - Uses Checkmate fast alpha-first resolver variant
 - Uses Sunduq multi-source movie/TV flow (Vidlink + VixSrc)
+- Uses VidEasy streams (1080p+)
+- Uses VidSrc (vsrc.su/cloudnestra) streams (1080p+)
+- Uses VidFast streams (1080p+)
 
 ## Add to Nuvio
 
