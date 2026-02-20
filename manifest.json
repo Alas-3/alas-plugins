@@ -45,6 +45,34 @@
       "logo": "https://raw.githubusercontent.com/Alas-3/alas-plugins/main/Assets/animepahe.png",
       "contentLanguage": ["en"],
       "supportsExternalPlayer": true
+    },
+    {
+      "id": "alas-checkmate",
+      "name": "alas-checkmate",
+      "description": "Checkmate source adapted from downloads/sources 2 for Nuvio",
+      "version": "1.0.0",
+      "author": "Alas",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/alas-checkmate.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://files.catbox.moe/krovkt.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
+    },
+    {
+      "id": "alas-checkmate-fast",
+      "name": "alas-checkmate-fast",
+      "description": "Fast Checkmate variant using alpha-first resolver",
+      "version": "1.0.0",
+      "author": "Alas",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/alas-checkmate-fast.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://files.catbox.moe/krovkt.png",
+      "contentLanguage": ["en"],
+      "supportsExternalPlayer": true
     }
   ]
 }
